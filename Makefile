@@ -1,3 +1,11 @@
+KINDEST_NAME := $(shell kind get clusters)
+
+
+.PHONY: install-kind
+install-kind:
+	curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+	chmod +x ./kind
+	sudo mv ./kind /usr/bin/kind
 
 .PHONY: 116
 116: delete
@@ -25,4 +33,5 @@
 
 .PHONY: delete
 delete:
-	kind delete cluster
+	@echo $(KINDEST_NAME)
+	@[ "${KINDEST_NAME}" ] && kind delete cluster --name $(KINDEST_NAME) || ( echo "No KinD cluster to delete")

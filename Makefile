@@ -19,6 +19,10 @@
 120: delete
 	kind create cluster --config k8s120.yaml
 
+.PHONY: 121
+121: delete
+	kind create cluster --config k8s121.yaml
+
 .PHONY: delete
 delete:
 	kind delete cluster
